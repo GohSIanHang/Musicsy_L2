@@ -250,7 +250,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 color: Colors.green,
                                 textColor: Colors.white,
                                 elevation: 10,
-                                onPressed: _onRegister,
+                                onPressed: _register,
                               ),
                             ],
                           ),
@@ -316,13 +316,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+
+  void _register() {
+    showDialog(
+        context: context,
+        builder: (_) => new AlertDialog(
+              title: new Text("Confirmation"),
+              content: new Text(
+                "Confirm register?",
+              ),
+              actions: <Widget>[
+                new FlatButton(
+                  child: new Text('Yes'),
+                  textColor: Colors.blue,
+                  onPressed: () {
+                    _onRegister();
+                    Navigator.of(context).pop(false);
+                  },
+                ),
+                new FlatButton(
+                  child: new Text("No"),
+                  textColor: Colors.blue,
+                  onPressed: () {
+                    Navigator.of(context).pop(false);
+                  },
+                ),
+              ],
+            ));
+  }
+
+
   void _onRegister() {
     String name = _nameEditingController.text;
     String email = _emEditingController.text;
     String phone = _phoneEditingController.text;
     String password = _passEditingController.text;
     if (!_isChecked) {
-      Toast.show("Please Accept Term", context,
+      Toast.show("Register Failed! Please Accept Term First", context,
           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       return;
     }
@@ -465,7 +495,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       builder: (BuildContext context) {
         // return object of type Dialog
         return AlertDialog(
-          title: new Text("End-User License Agreement (EULA) of MyFurniture"),
+          title: new Text("End-User License Agreement (EULA) of Musicsy"),
           content: new Container(
             height: screenHeight / 2,
             child: Column(

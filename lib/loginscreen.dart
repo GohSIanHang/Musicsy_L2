@@ -23,7 +23,8 @@ class _LoginScreenState extends State<Loginscreen> {
   double screenHeight;
   TextEditingController _emcontroller = new TextEditingController();
   TextEditingController _pscontroller = new TextEditingController();
-  String urlLogin = "http://gohaction.com/GohSianHang262333/musicsy/php/login_user.php";
+  String urlLogin =
+      "http://gohaction.com/GohSianHang262333/musicsy/php/login_user.php";
 
   @override
   void initState() {
@@ -62,26 +63,24 @@ class _LoginScreenState extends State<Loginscreen> {
 
   Widget lowerHalf(BuildContext context) {
     return Container(
-      
         child: Center(
             child: SingleChildScrollView(
       padding: EdgeInsets.only(left: 10, right: 10),
       //padding: EdgeInsets.only(left: 10, right: 10, top: 80, bottom: 10),
       child: Column(
         children: <Widget>[
-          
           Card(
             elevation: 8,
             color: Colors.grey[850],
             child: Container(
               decoration: BoxDecoration(
-                gradient: LinearGradient(colors: <Color>[
-              Colors.grey[900],
-              Colors.blueGrey[900],
-              Colors.blueGrey[900],
-              Colors.blueGrey[800],
-              Colors.blueGrey[700]
-            ])),
+                  gradient: LinearGradient(colors: <Color>[
+                Colors.grey[900],
+                Colors.blueGrey[900],
+                Colors.blueGrey[900],
+                Colors.blueGrey[800],
+                Colors.blueGrey[700]
+              ])),
               padding: EdgeInsets.fromLTRB(20, 10, 30, 10),
               child: Column(
                 children: <Widget>[
@@ -212,7 +211,13 @@ class _LoginScreenState extends State<Loginscreen> {
               Text("Don't have an account yet? ",
                   style: TextStyle(fontSize: 16.0, color: Colors.white)),
               GestureDetector(
-                onTap: _registerUser,
+                onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                RegisterScreen()));
+                  }, 
                 child: Text(
                   "Sign up",
                   style: TextStyle(
@@ -263,9 +268,7 @@ class _LoginScreenState extends State<Loginscreen> {
           Text(
             " MUSICSY",
             style: TextStyle(
-                fontSize: 35,
-                color: Colors.black,
-                fontWeight: FontWeight.w900),
+                fontSize: 35, color: Colors.black, fontWeight: FontWeight.w900),
           ),
           Icon(
             Icons.music_note_sharp,
@@ -278,7 +281,6 @@ class _LoginScreenState extends State<Loginscreen> {
   }
 
   void _userLogin() async {
-    
     ProgressDialog pr = new ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: false);
     pr.style(message: "Login...");
@@ -301,7 +303,7 @@ class _LoginScreenState extends State<Loginscreen> {
             context,
             MaterialPageRoute(
                 builder: (BuildContext context) => MainScreen(
-                      // user: _user,
+                    // user: _user,
                     )));
       } else {
         pr.hide();
@@ -312,37 +314,6 @@ class _LoginScreenState extends State<Loginscreen> {
       print(err);
       pr.hide();
     });
-  }
-
-  void _registerUser() {
-    showDialog(
-        context: context,
-        builder: (_) => new AlertDialog(
-              title: new Text("Sign up?"),
-              content: new Text(
-                "Do you want to create new account?",
-              ),
-              actions: <Widget>[
-                new FlatButton(
-                  child: new Text('Yes'),
-                  textColor: Colors.blue,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                RegisterScreen()));
-                  },
-                ),
-                new FlatButton(
-                  child: new Text("No"),
-                  textColor: Colors.blue,
-                  onPressed: () {
-                    Navigator.of(context).pop(false);
-                  },
-                ),
-              ],
-            ));
   }
 
   void _forgotPassword() {
@@ -374,7 +345,7 @@ class _LoginScreenState extends State<Loginscreen> {
               child: new Text("Yes"),
               textColor: Colors.blue,
               onPressed: () {
-                Navigator.of(context).pop();  
+                Navigator.of(context).pop();
                 print(
                   phoneController.text,
                 );
